@@ -1,4 +1,4 @@
-# TopCoWSubmissions
+# TopCoW Submissions
 This repo contains the inference code for the [TopCoW](https://topcow23.grand-challenge.org/) multi-class CoW segmentation submissions of the organizers Fabio Musio and Kaiyuan Yang. The submissions were ranked 2nd (MRA) and 3rd (CTA) on our [public leaderboards](https://topcow23.grand-challenge.org/evaluation/finaltest-mra-multiclass/leaderboard/).
 
 Details and results on our TopCoW challenge can be found in the TopCoW summary paper on arXiv: [https://arxiv.org/abs/2312.17670](https://arxiv.org/abs/2312.17670). 
@@ -11,10 +11,35 @@ Details and results on our TopCoW challenge can be found in the TopCoW summary p
       archivePrefix={arXiv},
       primaryClass={cs.CV}
 }
-````
-
+```
 
 ## Introduction
+The Circle of Willis (CoW) is an important anastomotic network of arteries connecting the anterior and posterior circulations of the brain, as well as the left and right cerebral hemispheres.  Due to its centrality, the CoW is commonly involved in pathologies like aneurysms and stroke. Hence, an accurate characterization of the CoW is of great clinical relevance. 
+
+The TopCoW challenge was the first public challenge on CoW angio-architecture extraction and brain vessel segment annotation on two common angiographic imaging modalities, namely magnetic resonance angiography (MRA) and computed tomography angiography (CTA). 
+The aim of the challenge was to extract the CoW vessels from 3D angiographic imaging by segmentation of the vessel components. For that purpose, we released a new [dataset](https://topcow23.grand-challenge.org/data/) of joint-modalities, CTA and MRA of the same patient cohort, both with annotations of the anatomy of the CoW.
+
+As organizers, we submitted baseline algorithms for the CoW multi-class segmentation for both MRA and CTA. The inference code and model weights are published in this repo and can be used freely for CoW vessel segmentation tasks.
+
+## Method Description
+A simple two-stage approach was employed: The [nnDetection](https://github.com/MIC-DKFZ/nnDetection) framework was used to detect and extract custom ROIs containing the CoW based on the binary labels and a 3D [nnUNet](https://github.com/MIC-DKFZ/nnUNet) was employed for the subsequent multi-class segmentation on the ROIs. Additionally, inter-modal registration was used as a data augmentation strategy, registering all the image pairs and thereby doubling the size of the training set for both modalities.
+
+## Usage
+### Prerequisites
+Both the nnDetection and the nnUNet frameworks need to be installed. Due to a lack of compatibility of their respective dependencies, two separate environments must be installed and activated consecutively. 
+
+Other than that, the base environment only needs Numpy and SimpleITK to run properly. If not already installed, run
+```
+pip install -r requirements.txt
+```
+
+#### nnDetection
+bla
+
+#### nnUNet
+bla
+
+
 
 
 
