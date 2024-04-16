@@ -1,5 +1,5 @@
 # TopCoW Submissions
-This repo contains the inference code for the [TopCoW](https://topcow23.grand-challenge.org/) multi-class CoW segmentation submissions of the organizers Fabio Musio and Kaiyuan Yang. The submissions were ranked 2nd (MRA) and 3rd (CTA) on our [public leaderboards](https://topcow23.grand-challenge.org/evaluation/finaltest-mra-multiclass/leaderboard/).
+This repo contains the inference code for the [TopCoW](https://topcow23.grand-challenge.org/) multi-class CoW segmentation submissions of the organizers Fabio Musio and Kaiyuan Yang. The submissions were **ranked 2nd (MRA) and 3rd (CTA)** on our [public leaderboards](https://topcow23.grand-challenge.org/evaluation/finaltest-mra-multiclass/leaderboard/).
 
 Details and results on our TopCoW challenge can be found in the TopCoW summary paper on arXiv: [https://arxiv.org/abs/2312.17670](https://arxiv.org/abs/2312.17670). 
 ```
@@ -34,10 +34,50 @@ pip install -r requirements.txt
 ```
 
 #### nnDetection
-bla
+Create a virtual environment inside the *nnDet* folder and activate it. The default name is **.detenv**.
+```
+cd nnDet
+python3 -m venv .detenv
+source .detenv/bin/activate
+```
+Then follow the instrutctions for installing nnDetection from source: [https://github.com/MIC-DKFZ/nnDetection?tab=readme-ov-file#source](https://github.com/MIC-DKFZ/nnDetection?tab=readme-ov-file#source).
+
+**Important:** The environment variables *det_data* and *det_models* must point to *nnDet/input* and *nnDet/models* respectively! They can be set by adding the following lines to the *.detenv/bin/activate* file (or to *.bashrc*):
+```
+export det_data="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnDet/input"
+export det_models="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnDet/model"
+export OMP_NUM_THREADS=1
+```
+(Of course you need to adapt the paths. Just keep the last part *nnDet/input* and *nnDet/model* as is!)
 
 #### nnUNet
-bla
+Create a virtual environment inside the *nnUNet* folder and activate it. The default name is **.segenv**.
+```
+cd nnUNet
+python3 -m venv .segenv
+source .segenv/bin/activate
+```
+Then follow the instrutctions for installing nnUNet from source: [https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/installation_instructions.md#installation-instructions](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/installation_instructions.md#installation-instructions).
+
+**Important:** The environment variables *nnUNet_raw*, *nnUNet_preprocessed* and *nnUNet_results* must point to *nnUNet/input/image*, *nnUNet/input/preprocessed* and *nnUNet/model/* respectively! They can be set by adding the following lines to the *.segenv/bin/activate* file (or to *.bashrc*):
+```
+export nnUNet_raw="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnUNet/input/image"
+export nnUNet_preprocessed="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnUNet/input/preprocessed"
+export nnUNet_results="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnUNet/model"
+```
+(Of course you need to adapt the paths. Just keep the last parts *nnUNet/input/image*, *nnUNet/input/preprocessed* and *nnUNet/model/* as is!)
+
+## Running Inference
+Once you have placed your angiographic images in the correct input folder, you can basically just run the *inference.py* script to produce the CoW multi-class segmentation. More precisely:
+1. Store your MRA images (CTA images) in *input/head-mr-angio* (*input/head-ct-angio*)
+2. Specify the track (either 'mr' or 'ct') at the top of the script *inference.py*.  
+    - Optionally, you can specify the name of your det_env and seg_env. Defaults are *.detenv* and *.segenv*
+3. Run the script. 
+    - The outputs are stored in *output/images/cow-multiclass-segmentation*
+
+
+
+
 
 
 
