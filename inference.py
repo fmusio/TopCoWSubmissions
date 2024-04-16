@@ -25,8 +25,8 @@ import subprocess
 TRACK = 'ct'
 
 # Optional TODO: Specify name of nnDet detection  and nnUNet segmentation environments
-DET_ENV = '.detvenv' # default value
-SEG_ENV = '.segvenv' # default value
+DET_ENV = '.detenv' # default value
+SEG_ENV = '.segenv' # default value
 # End of TODO
 #######################################################################################
 
@@ -419,9 +419,4 @@ if __name__ == "__main__":
     # NOTE: TRACK, DET_ENV and SEG_ENV are specified at the top of the script
     cowsegbase = CoWSegBaseline(TRACK, det_env_name=DET_ENV, seg_env_name=SEG_ENV)
     cowsegbase.run_inference()
-    # file = './nnDet/model/Task115_CoWDetCTWholeData/RetinaUNetV001_D3V001_3d/fold4/plan_inference.pkl'
-    # with open(file, 'rb') as f:
-    #         data = pickle.load(f)
-        
-    # print(data)
 
