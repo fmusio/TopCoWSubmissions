@@ -44,9 +44,10 @@ Then follow the instrutctions for installing nnDetection from source: [https://g
 
 **Important:** The environment variables *det_data* and *det_models* must point to *nnDet/input* and *nnDet/models* respectively! They can be set by adding the following lines to the *.detenv/bin/activate* file (or to *.bashrc*):
 ```
-export det_data="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnDet/input"
-export det_models="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnDet/model"
+export det_data="/home/fmusio/projects/TopCoWSubmissions/nnDet/input"
+export det_models="/home/fmusio/projects/TopCoWSubmissions/nnDet/model"
 export OMP_NUM_THREADS=1
+export det_num_threads=12
 ```
 (Of course you need to adapt the paths. Just keep the last parts *nnDet/input* and *nnDet/model* as is!)
 
@@ -57,13 +58,13 @@ cd nnUNet
 python3 -m venv .segenv
 source .segenv/bin/activate
 ```
-Then follow the instrutctions for installing nnUNet from source: [https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/installation_instructions.md#installation-instructions](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/installation_instructions.md#installation-instructions).
+Then follow the instrutctions for installing nnUNet: [https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/installation_instructions.md#installation-instructions](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/installation_instructions.md#installation-instructions).
 
 **Important:** The environment variables *nnUNet_raw*, *nnUNet_preprocessed* and *nnUNet_results* must point to *nnUNet/input/image*, *nnUNet/input/preprocessed* and *nnUNet/model/* respectively! They can be set by adding the following lines to the *.segenv/bin/activate* file (or to *.bashrc*):
 ```
-export nnUNet_raw="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnUNet/input/image"
-export nnUNet_preprocessed="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnUNet/input/preprocessed"
-export nnUNet_results="/home/fmusio/projects/topcowsubmission/BaselineAlgoMRMulticlass/nnUNet/model"
+export nnUNet_raw="/home/fmusio/projects/TopCoWSubmissions/nnUNet/input/image"
+export nnUNet_preprocessed="/home/fmusio/projects/TopCoWSubmissions/nnUNet/input/preprocessed"
+export nnUNet_results="/home/fmusio/projects/TopCoWSubmissions/nnUNet/model"
 ```
 (Of course you need to adapt the paths. Just keep the last parts *nnUNet/input/image*, *nnUNet/input/preprocessed* and *nnUNet/model/* as is!)
 
