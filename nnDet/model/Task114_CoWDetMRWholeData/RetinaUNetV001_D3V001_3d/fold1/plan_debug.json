@@ -1,0 +1,187 @@
+{
+    "mode": "3d",
+    "target_spacing": "[0.60000229 0.35714287 0.35714287]",
+    "normalization_schemes": {
+        "0": "nonCT"
+    },
+    "use_mask_for_norm": {
+        "0": "False"
+    },
+    "anisotropy_threshold": "3",
+    "resample_anisotropy_threshold": "3",
+    "target_spacing_percentile": "50",
+    "dim": "3",
+    "num_modalities": "1",
+    "all_classes": "[0]",
+    "num_classes": "1",
+    "transpose_forward": [
+        "0",
+        "1",
+        "2"
+    ],
+    "transpose_backward": [
+        "0",
+        "1",
+        "2"
+    ],
+    "planner_id": "D3V001",
+    "network_dim": "3",
+    "dataloader_kwargs": {},
+    "data_identifier": "D3V001_3d",
+    "postprocessing": {},
+    "patch_size": "[ 80 224 160]",
+    "batch_size": "4",
+    "architecture": {
+        "arch_name": "RetinaUNetV001",
+        "max_channels": "320",
+        "start_channels": "32",
+        "fpn_channels": "128",
+        "head_channels": "128",
+        "classifier_classes": "1",
+        "seg_classes": "1",
+        "in_channels": "1",
+        "dim": "3",
+        "class_weight": [
+            "0.5",
+            "0.0"
+        ],
+        "conv_kernels": [
+            [
+                "3",
+                "3",
+                "3"
+            ],
+            [
+                "3",
+                "3",
+                "3"
+            ],
+            [
+                "3",
+                "3",
+                "3"
+            ],
+            [
+                "3",
+                "3",
+                "3"
+            ],
+            [
+                "3",
+                "3",
+                "3"
+            ],
+            [
+                "3",
+                "3",
+                "3"
+            ]
+        ],
+        "strides": [
+            [
+                "2",
+                "2",
+                "2"
+            ],
+            [
+                "2",
+                "2",
+                "2"
+            ],
+            [
+                "2",
+                "2",
+                "2"
+            ],
+            [
+                "2",
+                "2",
+                "2"
+            ],
+            [
+                "1",
+                "2",
+                "2"
+            ]
+        ],
+        "decoder_levels": [
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    "anchors": {
+        "width": [
+            [
+                "13.0",
+                "15.0",
+                "18.0"
+            ],
+            [
+                "26.0",
+                "30.0",
+                "36.0"
+            ],
+            [
+                "52.0",
+                "60.0",
+                "72.0"
+            ],
+            [
+                "52.0",
+                "60.0",
+                "72.0"
+            ]
+        ],
+        "height": [
+            [
+                "20.0",
+                "14.0",
+                "17.0"
+            ],
+            [
+                "40.0",
+                "28.0",
+                "34.0"
+            ],
+            [
+                "80.0",
+                "56.0",
+                "68.0"
+            ],
+            [
+                "160.0",
+                "112.0",
+                "136.0"
+            ]
+        ],
+        "depth": [
+            [
+                "24.0",
+                "19.0",
+                "21.0"
+            ],
+            [
+                "48.0",
+                "38.0",
+                "42.0"
+            ],
+            [
+                "96.0",
+                "76.0",
+                "84.0"
+            ],
+            [
+                "192.0",
+                "152.0",
+                "168.0"
+            ]
+        ],
+        "stride": "1"
+    },
+    "target_spacing_transposed": "[0.60000229 0.35714287 0.35714287]",
+    "median_shape_transposed": "[197.58438138 479.63123856 393.83202186]",
+    "do_dummy_2D_data_aug": "False",
+    "trigger_lr1": "True"
+}

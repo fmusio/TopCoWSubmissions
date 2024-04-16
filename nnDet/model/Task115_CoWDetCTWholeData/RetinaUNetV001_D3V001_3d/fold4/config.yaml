@@ -1,0 +1,184 @@
+exp:
+  tag: ''
+  fold: 4
+  id: ${module}_${plan}${exp.tag}
+train:
+  mode: overwrite
+  val_test: true
+host:
+  parent_data: ${oc.env:det_data}
+  parent_results: ${oc.env:det_models}
+  data_dir: ${host.parent_data}/${task}
+  prep_dir: ${host.parent_data}/${task}
+  network_training_output_dir: ${host.parent_results}
+  raw_output_dir: ${host.prep_dir}/raw
+  splitted_4d_output_dir: ${host.prep_dir}/raw_splitted
+  cropped_output_dir: ${host.prep_dir}/raw_cropped
+  preprocessed_output_dir: ${host.parent_data}/${task}/preprocessed
+  plan_path: ${host.preprocessed_output_dir}/${plan}.pkl
+augmentation:
+  name: base_more
+  transforms: BaseMoreAug
+  transforms_kwargs: {}
+  selected_data_channels: null
+  selected_seg_channels: null
+  p_eldef: 0.2
+  do_elastic: false
+  elastic_deform_alpha:
+  - 0.0
+  - 900.0
+  elastic_deform_sigma:
+  - 9.0
+  - 13.0
+  p_scale: 0.2
+  do_scaling: true
+  scale_range:
+  - 0.7
+  - 1.4
+  independent_scale_factor_for_each_axis: false
+  p_rot: 0.2
+  do_rotation: true
+  rotation_x:
+  - -30
+  - 30
+  rotation_y:
+  - -30
+  - 30
+  rotation_z:
+  - -30
+  - 30
+  order_data: 3
+  border_mode_data: constant
+  border_cval_data: 0
+  order_seg: 0
+  border_cval_seg: -1
+  border_mode_seg: constant
+  random_crop: false
+  random_crop_dist_to_border: null
+  p_gamma: 0.3
+  do_gamma: true
+  gamma_retain_stats: true
+  gamma_range:
+  - 0.7
+  - 1.5
+  do_mirror: true
+  mirror_axes:
+  - 0
+  - 1
+  - 2
+  do_additive_brightness: false
+  additive_brightness_p_per_sample: 0.15
+  additive_brightness_p_per_channel: 0.5
+  additive_brightness_mu: 0.0
+  additive_brightness_sigma: 0.1
+  2d_overwrites:
+    elastic_deform_alpha:
+    - 0.0
+    - 200.0
+    elastic_deform_sigma:
+    - 9.0
+    - 13.0
+    rotation_x:
+    - -180
+    - 180
+    rotation_y:
+    - 0
+    - 0
+    rotation_z:
+    - 0
+    - 0
+    dummy_2D: false
+    mirror_axes:
+    - 0
+    - 1
+module: RetinaUNetV001
+predictor: BoxPredictorSelective
+plan: D3V001_3d
+planner: D3V001
+augment_cfg:
+  augmentation: ${augmentation}
+  num_train_batches_per_epoch: ${trainer_cfg.num_train_batches_per_epoch}
+  num_val_batches_per_epoch: ${trainer_cfg.num_val_batches_per_epoch}
+  dataloader: DataLoader{}DOffset
+  oversample_foreground_percent: 0.5
+  dataloader_kwargs: {}
+  num_threads: ${oc.env:det_num_threads, "12"}
+  num_cached_per_thread: 2
+  multiprocessing: true
+trainer_cfg:
+  gpus: 1
+  accelerator: null
+  precision: 16
+  amp_backend: native
+  amp_level: O1
+  deterministic: false
+  benchmark: false
+  monitor_key: mAP_IoU_0.10_0.50_0.05_MaxDet_100
+  monitor_mode: max
+  max_num_epochs: 50
+  num_train_batches_per_epoch: 2500
+  num_val_batches_per_epoch: 100
+  initial_lr: 0.01
+  sgd_momentum: 0.9
+  sgd_nesterov: true
+  weight_decay: 3.0e-05
+  warm_iterations: 4000
+  warm_lr: 1.0e-06
+  poly_gamma: 0.9
+  swa_epochs: 10
+model_cfg:
+  encoder_kwargs: {}
+  decoder_kwargs:
+    min_out_channels: 8
+    upsampling_mode: transpose
+    num_lateral: 1
+    norm_lateral: false
+    activation_lateral: false
+    num_out: 1
+    norm_out: false
+    activation_out: false
+  head_kwargs: {}
+  head_classifier_kwargs:
+    num_convs: 1
+    norm_channels_per_group: 16
+    norm_affine: true
+    reduction: mean
+    loss_weight: 1.0
+    prior_prob: 0.01
+  head_regressor_kwargs:
+    num_convs: 1
+    norm_channels_per_group: 16
+    norm_affine: true
+    reduction: sum
+    loss_weight: 1.0
+    learn_scale: true
+  head_sampler_kwargs:
+    batch_size_per_image: 32
+    positive_fraction: 0.33
+    pool_size: 20
+    min_neg: 1
+  segmenter_kwargs:
+    dice_kwargs:
+      batch_dice: true
+  matcher_kwargs:
+    num_candidates: 4
+    center_in_gt: false
+  plan_arch_overwrites: {}
+  plan_anchors_overwrites: {}
+prep:
+  overwrite: false
+  crop: true
+  analyze: true
+  plan: true
+  process: true
+task: Task115_CoWDetCTWholeData
+data:
+  task: Task115_CoWDetCTWholeData
+  name: CoWDetCTWholeData
+  target_class: 0
+  test_labels: false
+  labels:
+    '0': CoW
+  modalities:
+    '0': CT
+  dim: 3
