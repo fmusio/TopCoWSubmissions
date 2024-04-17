@@ -21,11 +21,15 @@ The aim of the challenge was to extract the CoW vessels from 3D angiographic ima
 
 As organizers, we submitted baseline algorithms for the CoW multi-class segmentation for both MRA and CTA. The inference code and model weights are published in this repo and can be used freely for CoW vessel segmentation tasks.
 
+![alt text for screen readers](C:\Users\muso\Pictures\Screenshots\Screenshot 2024-04-17 102220.png "Text to show on mouseover")
+
 ## Method Description
 A simple two-stage approach was employed: The [nnDetection](https://github.com/MIC-DKFZ/nnDetection) framework was used to detect and extract custom CoW ROIs based on the binary labels and a 3D [nnUNet](https://github.com/MIC-DKFZ/nnUNet) was employed for the subsequent multi-class segmentation on the ROIs. Additionally, inter-modal registration was used as a data augmentation strategy, registering all the image pairs and thereby doubling the size of the training set for both modalities.
 
 ## Usage
 ### Prerequisites
+Clone this repo first. **NOTE:** Due to the model weights, the repo has a size of roughly 5GB!
+
 Both the **nnDetection** and the **nnUNet** frameworks need to be installed. Due to a lack of compatibility of their respective dependencies, two separate environments must be created and activated consecutively. 
 
 Other than that, the base environment only needs Numpy and SimpleITK to run properly. If not already installed, run
@@ -68,13 +72,20 @@ export nnUNet_results="/home/fmusio/projects/TopCoWSubmissions/nnUNet/model"
 ```
 (Of course you need to adapt the paths. Just keep the last parts *nnUNet/input/image*, *nnUNet/input/preprocessed* and *nnUNet/model/* as is!)
 
+### Make Shell Scripts Executable
+The python script *inference.py* calls the shell scripts *inference_detection.sh* and *inference_segmentation.sh* consecutively using *subprocess*. For this to work you might need to make the shell scripts executable by running
+```
+chmod +x inference_detection.sh inference_segmentation.sh
+```
+
 ## Running Inference
 Once you have placed your angiographic images in the correct input folder, you can basically just run the *inference.py* script to produce the CoW multi-class segmentations. More precisely:
-1. Store your MRA images (CTA images) in *input/head-mr-angio* (*input/head-ct-angio*)
-2. Specify the track (either 'mr' or 'ct') at the top of the script *inference.py* (marked as TODO).  
-    - Optionally, you can specify the name of your det_env and seg_env. Defaults are *.detenv* and *.segenv*
-3. Run the script. 
-    - The outputs are stored in *output/images/cow-multiclass-segmentation*
+1. Create the input folders *input/head-mr-angio* and *input/head-ct-angio*
+2. Store your MRA images (CTA images) in *input/head-mr-angio* (*input/head-ct-angio*). 
+3. Specify the track (either 'mr' or 'ct') at the top of the script *inference.py* (marked as TODO).  
+    - Optionally, you can specify the name of your det_env and seg_env. Defaults are *.detenv* and *.segenv*.
+4. Run the script. 
+    - The outputs are stored in *output/images/cow-multiclass-segmentation*.
 
 
 
