@@ -84,7 +84,7 @@ chmod +x inference_detection.sh inference_segmentation.sh
 ## Running Inference
 Once you have placed your angiographic images in the correct input folder, you can basically just run the *inference.py* script to produce the CoW multi-class segmentations. More precisely:
 1. Create the input folders *input/head-mr-angio* and *input/head-ct-angio*
-2. Store your MRA images (CTA images) in *input/head-mr-angio* (*input/head-ct-angio*). 
+2. Put your MRA images (CTA images) in *input/head-mr-angio* (*input/head-ct-angio*). 
 3. Specify the track (either 'mr' or 'ct') at the top of the script *inference.py* (marked as TODO).  
     - Optionally, you can specify the name of your det_env and seg_env. Defaults are *.detenv* and *.segenv*.
 4. Run the script. 
