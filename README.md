@@ -21,9 +21,8 @@ The aim of the challenge was to extract the CoW vessels from 3D angiographic ima
 
 As organizers, we submitted baseline algorithms for the CoW multi-class segmentation for both MRA and CTA. The inference code and model weights are published in this repo and can be used freely for CoW vessel segmentation tasks.
 
-![alt text](https://github.com/fmusio/Images/blob/main/topcow_mr_095.png?raw=true)
 <p align="center">
-  <img src="https://github.com/fmusio/Images/blob/main/topcow_mr_095.png" width="500" />
+  <img src="https://github.com/fmusio/Images/blob/main/topcow_mr_095.png" width="600" />
 </p>
 
 
