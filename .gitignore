@@ -2,9 +2,8 @@
 .detenv/
 .segenv/
 
-# all image files
+# files
 *.nii.gz
-
 *.pkl
 *.npz 
 
