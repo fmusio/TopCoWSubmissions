@@ -31,7 +31,17 @@ A simple two-stage approach was employed: The [nnDetection](https://github.com/M
 
 ## Usage
 ### Prerequisites
-Clone this repo first. **NOTE:** Due to the model weights, the repo has a size of roughly 5GB!
+Clone this repo first. ~**NOTE:** Due to the model weights, the repo has a size of roughly 5GB!~
+
+**Model Weights:** Since the model weights are too large for github, they can be found here: https://drive.google.com/drive/folders/14u33bdB8MawGJ7Z4M5AjNi-i3dx60yWj?usp=sharing. After cloning the repo you can download the weights from google drive and place them in the correct folders:  
+For nnDet there is just 1 fold for each task. Place the saved weights for each fold inside
+```
+nnDet/model/<TASK NAME>/RetinaUNetV001_D3V001_3d/<FOLD>
+```
+For nnUNet there are 5 folds for each task (or dataset). Place the saved weights for each fold inside
+```
+nnUNet/model/<DATASET NAME>/nnUNetTrainer__nnUNetPlans__3d_fullres/<FOLD>
+```
 
 Both the **nnDetection** and the **nnUNet** frameworks need to be installed. Due to a lack of compatibility of their respective dependencies, two separate environments must be created and activated consecutively. 
 
