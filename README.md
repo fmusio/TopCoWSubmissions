@@ -22,6 +22,10 @@ The aim of the challenge was to extract the CoW vessels from 3D angiographic ima
 
 As organizers, we submitted baseline algorithms for the CoW multi-class segmentation for both MRA and CTA. The inference code and model weights are published in this repo and can be used freely for CoW vessel segmentation tasks.
 
+<p align="center">
+  <img src="https://github.com/fmusio/TopCoWSubmissions/blob/main/topcow_segmentation_mr_095.png" width="600" />
+</p>
+
 
 ## Method Description
 A simple two-stage approach was employed: The [nnDetection](https://github.com/MIC-DKFZ/nnDetection) framework was used to detect and extract custom CoW ROIs based on the binary labels and a 3D [nnUNet](https://github.com/MIC-DKFZ/nnUNet) was employed for the subsequent multi-class segmentation on the ROIs. Additionally, inter-modal registration was used as a data augmentation strategy, registering all the image pairs and thereby doubling the size of the training set for both modalities.
