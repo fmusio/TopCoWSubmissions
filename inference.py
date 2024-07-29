@@ -182,6 +182,13 @@ class CoWSegBaseline():
         img = sitk.ReadImage(input_img_path)
         img_size = img.GetSize()
 
+        # # Can lead to errors if start or end is outside of image!
+        # roi_slice = (
+        #     slice(start[0], end[0] + 1),
+        #     slice(start[1], end[1] + 1),
+        #     slice(start[2], end[2] + 1),
+        # )
+
         # Ensure that start and end are within image boundaries
         start_x, start_y, start_z = max(0, start[0]), max(0, start[1]), max(0, start[2])
         end_x, end_y, end_z = min(img_size[0]-1, end[0]), min(img_size[1]-1, end[1]), min(img_size[2]-1, end[2])
@@ -191,13 +198,6 @@ class CoWSegBaseline():
             slice(start_y, end_y + 1),
             slice(start_z, end_z + 1),
         )
-
-        # # Can lead to errors if start or end is outside of image!
-        # roi_slice = (
-        #     slice(start[0], end[0] + 1),
-        #     slice(start[1], end[1] + 1),
-        #     slice(start[2], end[2] + 1),
-        # )
 
         # crop img
         img = img[roi_slice]
